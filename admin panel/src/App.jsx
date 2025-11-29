@@ -1,20 +1,31 @@
-import React, { useEffect } from "react";
-import { Routes, Route, Navigate, useRoutes } from "react-router-dom";
-import { ProtectedRoute } from "ProtectedRoute";
-import { withAuthContext } from "context/Auth";
-import routes from "ProtectedRoute";
-const App = ({ Token, CheckToken }) => {
-  useEffect(() => {
-    CheckToken();
-  }, []);
+// Example: src/App.js or App.js (adjust path)
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "../context/AuthContext"; // adjust path if needed
+import RequireAuth from "../components/RequireAuth";
+import SignIn from "../pages/SignIn";
+import NotAuthorized from "../pages/NotAuthorized";
+import AdminHome from "../pages/AdminHome";
 
-  const routing = useRoutes(routes(Token));
-
+export default function App() {
   return (
-    <>
-      {routing}
-    </>
-  );
-};
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/SignIn" element={<SignIn />} />
+          <Route path="/not-authorized" element={<NotAuthorized />} />
 
-export default withAuthContext(App);
+          <Route
+            path="/admin/*"
+            element={
+              <RequireAuth allowedRoles={['admin']}>
+                <AdminHome />
+              </RequireAuth>
+            }
+          />
+          {/* other public routes */}
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
+}
