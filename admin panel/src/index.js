@@ -14,6 +14,12 @@ import ProductProvider from "context/Product";
 import DiscountProvider from "context/Discount";
 import CouponProvider from "context/Coupon";
 
+import { PublicClientApplication } from "@azure/msal-browser";
+import { MsalProvider } from "@azure/msal-react";
+import { msalConfig } from "./msalConfig";
+
+const msalInstance = new PublicClientApplication(msalConfig);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
@@ -28,7 +34,9 @@ root.render(
                   <BankProvider>
                     <UserProvider>
                       <ProductProvider>
-                        <App />
+                        <MsalProvider instance={msalInstance}>
+                          <App />
+                        </MsalProvider> 
                       </ProductProvider>
                     </UserProvider>
                   </BankProvider>
