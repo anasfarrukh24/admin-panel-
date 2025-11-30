@@ -1,7 +1,7 @@
 export const msalConfig = {
   auth: {
-    clientId: "60b6ae15-e9d1-4cf7-ab33-77228c57e71e",//"YOUR_ENTRA_CLIENT_ID",
-    authority: "https://login.microsoftonline.com/d32b01ef-c782-4167-90c7-e2ec83e0c09a",//Tenent ID
-    redirectUri: "http://localhost:3000"
+    clientId: "https://petty-kv.vault.azure.net/secrets/ClientID/92a936f916ce43c398c9704712ed9019",//"YOUR_ENTRA_CLIENT_ID",
+    authority: "https://petty-kv.vault.azure.net/secrets/Authority/0414c6759c954a14bfa7e428d2986dca",//Tenent ID
+    redirectUri: "https://petty-kv.vault.azure.net/secrets/Redirecturi/158a8a4f97da482b95028a58ecb199cf"
   }
 };
